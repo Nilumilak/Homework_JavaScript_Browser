@@ -6,8 +6,14 @@ let winCounter = 0
 let looseCounter = 0
 
 const getHole = index => document.getElementById(`hole${index}`)
+const refreshGame = () => {
+    winCounter = 0
+    looseCounter = 0
+    winCounterText.textContent = winCounter
+    looseCounterText.textContent = looseCounter
+}
 
-const catchBeaver = function(element) {
+const catchBeaver = function (element) {
     if (element.className === 'hole hole_has-mole') {
         winCounter++
         winCounterText.textContent = winCounter
@@ -18,8 +24,10 @@ const catchBeaver = function(element) {
 
     if (winCounter === 10) {
         alert('Вы выиграли!')
+        refreshGame()
     } else if (looseCounter === 5) {
         alert('Вы проиграли!')
+        refreshGame()
     }
 }
 
