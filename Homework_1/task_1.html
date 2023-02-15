@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Таймер Обратного отсчета</title>
+</head>
+<body>
+    <p>До окончания конкурса осталось секунд: <span id="counter">00:00:40</span></p>
+    <a id="download" href="netology.jpg" download target="_blank">
+
+    <script type="text/javascript">
+        const span = document.getElementById('counter')
+        const link = document.getElementById('download')
+        let counter = span.textContent.split(':')
+        let hours = Number(counter[0])
+        let minutes = Number(counter[1])
+        let seconds = Number(counter[2])
+
+        let counterInterval = setInterval(() => {
+            seconds--
+            span.textContent = `${hours.toString().padStart(2,0)}:${minutes.toString().padStart(2,0)}:${seconds.toString().padStart(2,0)}`
+            if (hours === 0 && minutes === 0 && seconds === 0) {
+                link.click()
+                alert('Вы победили в конкурсе!')
+                clearInterval(counterInterval)
+            } else if (minutes === 0 && seconds === 0) {
+                hours--
+                minutes = 60
+                seconds = 60
+            } else if (seconds === 0) {
+                minutes--
+                seconds = 60
+            }
+        }, 1000)
+    </script>
+
+</body>
+</html>
