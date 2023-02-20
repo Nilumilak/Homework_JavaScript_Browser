@@ -1,15 +1,26 @@
-const allTabs = Array.from(document.querySelectorAll('.tab'))
-const allTabContent = Array.from(document.querySelectorAll('.tab__content'))
-let currentTab = document.querySelector('.tab_active')
-let currentContent = document.querySelector('.tab__content_active')
+const allContainers = Array.from(document.querySelectorAll('.tabs'))
 
-allTabs.forEach((tab) => {
-  tab.addEventListener('click', () => {
-    currentTab.classList.remove('tab_active')
-    currentContent.classList.remove('tab__content_active')
-    tab.classList.add('tab_active')
-    allTabContent[allTabs.indexOf(tab)].classList.add('tab__content_active')
-    currentTab = tab
-    currentContent = allTabContent[allTabs.indexOf(tab)]
-  })
-})
+
+class Tabs {
+  constructor(container) {
+    this.allTabs = Array.from(container.querySelectorAll('.tab'))
+    this.allTabContent = Array.from(container.querySelectorAll('.tab__content'))
+    this.currentTab = container.querySelector('.tab_active')
+    this.currentContent = container.querySelector('.tab__content_active')
+
+    this.allTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        this.currentTab.classList.remove('tab_active')
+        this.currentContent.classList.remove('tab__content_active')
+        tab.classList.add('tab_active')
+        this.allTabContent[this.allTabs.indexOf(tab)].classList.add('tab__content_active')
+        this.currentTab = tab
+        this.currentContent = this.allTabContent[this.allTabs.indexOf(tab)]
+      })
+    })
+  }
+
+}
+
+
+allContainers.forEach((container) => { new Tabs(container) })
